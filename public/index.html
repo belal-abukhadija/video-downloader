@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Download videos from YouTube, Facebook, Instagram, TikTok, and more. Free online video downloader.">
+    <title>Video Downloader - Download from YouTube, TikTok, Instagram & More</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="url(#gradient)" />
+                    <path d="M20 10L12 16V28L20 34L28 28V16L20 10Z" fill="white" />
+                    <path d="M20 18V30L26 26V18L20 18Z" fill="url(#gradient2)" />
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" stop-color="#48bb78" />
+                            <stop offset="100%" stop-color="#2f855a" />
+                        </linearGradient>
+                        <linearGradient id="gradient2" x1="20" y1="18" x2="26" y2="30">
+                            <stop offset="0%" stop-color="#48bb78" />
+                            <stop offset="100%" stop-color="#2f855a" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Video Downloader</h1>
+            </div>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#how-to">How to Use</a>
+                <a href="#supported">Platforms</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Download Videos from Anywhere</h2>
+            <p>Fast, free, and easy video downloader supporting YouTube, TikTok, Instagram, Facebook, and more!</p>
+        </div>
+    </section>
+
+    <!-- Main Download Section -->
+    <main class="container">
+        <div class="download-card">
+            <div class="input-section">
+                <input type="text" id="videoUrl" placeholder="Paste video URL here (YouTube, TikTok, Instagram, etc.)"
+                    autocomplete="off">
+                <button id="getInfoBtn" class="btn btn-primary">
+                    <span class="btn-text">Get Video Info</span>
+                    <span class="spinner hidden"></span>
+                </button>
+            </div>
+
+            <div id="errorMessage" class="error-message hidden"></div>
+
+            <!-- Video Information Display -->
+            <div id="videoInfo" class="video-info hidden">
+                <div class="video-preview">
+                    <img id="videoThumbnail" src="" alt="Video thumbnail">
+                    <div class="video-details">
+                        <h3 id="videoTitle"></h3>
+                        <p class="video-meta">
+                            <span id="videoAuthor"></span>
+                            <span id="videoDuration"></span>
+                        </p>
+                        <p class="platform-badge" id="platformBadge"></p>
+                    </div>
+                </div>
+
+                <div class="download-options">
+                    <div class="option-group">
+                        <label for="formatSelect">Format:</label>
+                        <select id="formatSelect">
+                            <option value="mp4">MP4 (Video)</option>
+                            <option value="webm">WEBM (Video)</option>
+                            <option value="mp3">MP3 (Audio Only)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group" id="qualityGroup">
+                        <label for="qualitySelect">Quality:</label>
+                        <select id="qualitySelect">
+                            <option value="highest">Highest Available</option>
+                        </select>
+                    </div>
+
+                    <div class="subtitle-info" id="subtitleInfo">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path
+                                d="M0 12V4a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2zm4.5-6h2v1h-2V6zm0 2h2v1h-2V8zm0 2h2v1h-2v-1zm4-4h2v1h-2V6zm0 2h2v1h-2V8zm0 2h2v1h-2v-1z" />
+                        </svg>
+                        <span id="subtitleCount"></span>
+                    </div>
+                </div>
+
+                <button id="downloadBtn" class="btn btn-download">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 15L5 10h3V3h4v7h3l-5 5z" />
+                        <path d="M3 17h14v2H3v-2z" />
+                    </svg>
+                    <span class="btn-text">Download Video</span>
+                    <span class="spinner hidden"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3>Multiple Formats</h3>
+                    <p>Download in MP4, WEBM, or extract audio as MP3</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>All Platforms</h3>
+                    <p>YouTube, TikTok, Instagram, Facebook, Vimeo, Twitter & more</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Quick processing and high-speed downloads</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Quality Options</h3>
+                    <p>Choose from 144p to 4K resolution</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Private</h3>
+                    <p>No tracking, no data collection, no registration</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💯</div>
+                    <h3>100% Free</h3>
+                    <p>No hidden costs or premium subscriptions</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section id="how-to" class="how-to">
+            <h2>How to Use</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Copy Video URL</h3>
+                    <p>Go to the video platform and copy the video link from your browser</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Paste & Get Info</h3>
+                    <p>Paste the URL in the input field above and click "Get Video Info"</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Select Format & Quality</h3>
+                    <p>Choose your preferred format (MP4/WEBM/MP3) and quality</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Download</h3>
+                    <p>Click the download button and save your video!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supported Platforms -->
+        <section id="supported" class="supported-platforms">
+            <h2>Supported Platforms</h2>
+            <div class="platforms-grid">
+                <div class="platform">
+                    <div class="platform-icon" style="background: #FF0000;">▶</div>
+                    <span>YouTube</span>
+                </div>
+                <div class="platform">
+                    <div class="platform-icon" style="background: #000000;">♪</div>
+                    <span>TikTok</span>
+                </div>
+                <div class="platform">
+                    <div class="platform-icon"
+                        style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+                        📷</div>
+                    <span>Instagram</span>
+                </div>
+                <div class="platform">
+                    <div class="platform-icon" style="background: #1877F2;">f</div>
+                    <span>Facebook</span>
+                </div>
+                <div class="platform">
+                    <div class="platform-icon" style="background: #1DA1F2;">🐦</div>
+                    <span>Twitter</span>
+                </div>
+                <div class="platform">
+                    <div class="platform-icon" style="background: #00ADEF;">▷</div>
+                    <span>Vimeo</span>
+                </div>
+            </div>
+            <p class="note">Note: All platforms are fully supported with high-speed processing!</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Video Downloader. All rights reserved.</p>
+            <p>Programmer: Bela Abukhadija (<a href="mailto:belalabukhadija97@gmail.com"
+                    style="color: var(--primary-color); text-decoration: none;">belalabukhadija97@gmail.com</a>)</p>
+            <p>For more free tools, visit my website <a href="https://belal.work" target="_blank"
+                    style="color: var(--primary-color); text-decoration: none;">belal.work</a>.</p>
+            <p class="disclaimer">This tool is for personal use only. Please respect copyright laws and terms of service
+                of the platforms.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
