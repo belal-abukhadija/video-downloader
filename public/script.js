@@ -180,7 +180,7 @@ function displayVideoInfo(data) {
     platformBadge.textContent = getPlatformName(data.platform);
     
     // Populate quality options
-    qualitySelect.innerHTML = '<option value="highest">Highest Available</option>';
+    qualitySelect.innerHTML = '<option value="highest">Highest available</option>';
     
     if (data.qualities && data.qualities.length > 0) {
         data.qualities.forEach(quality => {
@@ -283,7 +283,7 @@ async function downloadVideo() {
         document.body.removeChild(a);
         
         // Show success message
-        showSuccessMessage('Download started! Check your downloads folder.');
+        showSuccessMessage('Download started. Check your downloads folder.');
         
     } catch (error) {
         console.error('Download error:', error);
@@ -295,10 +295,8 @@ async function downloadVideo() {
 
 function showSuccessMessage(message) {
     const successDiv = document.createElement('div');
-    successDiv.className = 'error-message';
-    successDiv.style.background = '#c6f6d5';
-    successDiv.style.color = '#22543d';
-    successDiv.style.borderLeftColor = '#48bb78';
+    successDiv.className = 'wb-alert wb-alert--ok';
+    successDiv.setAttribute('role', 'status');
     successDiv.textContent = message;
     
     errorMessage.parentNode.insertBefore(successDiv, errorMessage);

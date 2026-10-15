@@ -5,224 +5,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Download videos from YouTube, Facebook, Instagram, TikTok, and more. Free online video downloader.">
-    <title>Video Downloader - Download from YouTube, TikTok, Instagram & More</title>
+        content="Download videos and audio from YouTube, TikTok, Instagram, Facebook and more. Paste a link, pick a format, save the file.">
+    <title>Video Downloader</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="wb.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="40" height="40" rx="8" fill="url(#gradient)" />
-                    <path d="M20 10L12 16V28L20 34L28 28V16L20 10Z" fill="white" />
-                    <path d="M20 18V30L26 26V18L20 18Z" fill="url(#gradient2)" />
-                    <defs>
-                        <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
-                            <stop offset="0%" stop-color="#48bb78" />
-                            <stop offset="100%" stop-color="#2f855a" />
-                        </linearGradient>
-                        <linearGradient id="gradient2" x1="20" y1="18" x2="26" y2="30">
-                            <stop offset="0%" stop-color="#48bb78" />
-                            <stop offset="100%" stop-color="#2f855a" />
-                        </linearGradient>
-                    </defs>
+<body class="wb">
+    <header class="wb-bar">
+        <a class="wb-brand" href="/">
+            <span class="wb-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 4v11"/>
+                    <path d="m7 10 5 5 5-5"/>
+                    <path d="M5 20h14"/>
                 </svg>
-                <h1>Video Downloader</h1>
-            </div>
-            <nav>
-                <a href="#features">Features</a>
-                <a href="#how-to">How to Use</a>
-                <a href="#supported">Platforms</a>
-            </nav>
-        </div>
+            </span>
+            <span class="wb-brand-text">
+                <span class="wb-brand-name">Video Downloader</span>
+                <span class="wb-brand-owner">Belal's tools</span>
+            </span>
+        </a>
+        <nav class="wb-nav vd-nav" aria-label="On this page">
+            <a href="#how-to">How it works</a>
+            <a href="#supported">Sites</a>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h2>Download Videos from Anywhere</h2>
-            <p>Fast, free, and easy video downloader supporting YouTube, TikTok, Instagram, Facebook, and more!</p>
+    <main class="wb-page wb-page--narrow">
+        <div class="wb-head">
+            <h1 class="wb-title">Save a video from a link</h1>
+            <p class="wb-lede">Paste a link from YouTube, TikTok, Instagram, Facebook, X or Vimeo, choose a format, and download it.</p>
         </div>
-    </section>
 
-    <!-- Main Download Section -->
-    <main class="container">
-        <div class="download-card">
-            <div class="input-section">
-                <input type="text" id="videoUrl" placeholder="Paste video URL here (YouTube, TikTok, Instagram, etc.)"
-                    autocomplete="off">
-                <button id="getInfoBtn" class="btn btn-primary">
-                    <span class="btn-text">Get Video Info</span>
-                    <span class="spinner hidden"></span>
+        <!-- Main download section -->
+        <section class="wb-panel vd-card" aria-label="Download">
+            <div class="vd-input">
+                <label for="videoUrl" class="wb-sr">Video link</label>
+                <input type="url" id="videoUrl" class="wb-input" placeholder="https://www.youtube.com/watch?v=..."
+                    autocomplete="off" inputmode="url">
+                <button id="getInfoBtn" class="wb-btn wb-btn--primary wb-btn--lg" type="button">
+                    <span class="btn-text">Find video</span>
+                    <span class="wb-spin spinner hidden" aria-hidden="true"></span>
                 </button>
             </div>
 
-            <div id="errorMessage" class="error-message hidden"></div>
+            <div id="errorMessage" class="wb-alert error-message hidden" role="alert"></div>
 
-            <!-- Video Information Display -->
-            <div id="videoInfo" class="video-info hidden">
-                <div class="video-preview">
+            <!-- Video information -->
+            <div id="videoInfo" class="vd-info hidden">
+                <div class="vd-preview">
                     <img id="videoThumbnail" src="" alt="Video thumbnail">
-                    <div class="video-details">
-                        <h3 id="videoTitle"></h3>
-                        <p class="video-meta">
+                    <div class="vd-details">
+                        <span class="wb-chip" id="platformBadge"></span>
+                        <h2 class="wb-h2" id="videoTitle"></h2>
+                        <p class="wb-note vd-meta">
                             <span id="videoAuthor"></span>
-                            <span id="videoDuration"></span>
+                            <span id="videoDuration" class="wb-num"></span>
                         </p>
-                        <p class="platform-badge" id="platformBadge"></p>
                     </div>
                 </div>
 
-                <div class="download-options">
-                    <div class="option-group">
-                        <label for="formatSelect">Format:</label>
-                        <select id="formatSelect">
-                            <option value="mp4">MP4 (Video)</option>
-                            <option value="webm">WEBM (Video)</option>
-                            <option value="mp3">MP3 (Audio Only)</option>
+                <div class="vd-options">
+                    <div>
+                        <label class="wb-label" for="formatSelect">Format</label>
+                        <select id="formatSelect" class="wb-select">
+                            <option value="mp4">MP4 video</option>
+                            <option value="webm">WebM video</option>
+                            <option value="mp3">MP3, audio only</option>
                         </select>
                     </div>
 
-                    <div class="option-group" id="qualityGroup">
-                        <label for="qualitySelect">Quality:</label>
-                        <select id="qualitySelect">
-                            <option value="highest">Highest Available</option>
+                    <div id="qualityGroup">
+                        <label class="wb-label" for="qualitySelect">Quality</label>
+                        <select id="qualitySelect" class="wb-select">
+                            <option value="highest">Highest available</option>
                         </select>
-                    </div>
-
-                    <div class="subtitle-info" id="subtitleInfo">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path
-                                d="M0 12V4a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2zm4.5-6h2v1h-2V6zm0 2h2v1h-2V8zm0 2h2v1h-2v-1zm4-4h2v1h-2V6zm0 2h2v1h-2V8zm0 2h2v1h-2v-1z" />
-                        </svg>
-                        <span id="subtitleCount"></span>
                     </div>
                 </div>
 
-                <button id="downloadBtn" class="btn btn-download">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10 15L5 10h3V3h4v7h3l-5 5z" />
-                        <path d="M3 17h14v2H3v-2z" />
+                <p class="wb-note vd-subs" id="subtitleInfo">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M0 12V4a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2zm4.5-6h2v1h-2V6zm0 2h2v1h-2V8zm0 2h2v1h-2v-1zm4-4h2v1h-2V6zm0 2h2v1h-2V8zm0 2h2v1h-2v-1z" />
                     </svg>
-                    <span class="btn-text">Download Video</span>
-                    <span class="spinner hidden"></span>
+                    <span id="subtitleCount"></span>
+                </p>
+
+                <button id="downloadBtn" class="wb-btn wb-btn--primary wb-btn--lg wb-btn--block">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/>
+                    </svg>
+                    <span class="btn-text">Download</span>
+                    <span class="wb-spin spinner hidden" aria-hidden="true"></span>
                 </button>
             </div>
-        </div>
-
-        <!-- Features Section -->
-        <section id="features" class="features">
-            <h2>Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎬</div>
-                    <h3>Multiple Formats</h3>
-                    <p>Download in MP4, WEBM, or extract audio as MP3</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>All Platforms</h3>
-                    <p>YouTube, TikTok, Instagram, Facebook, Vimeo, Twitter & more</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Quick processing and high-speed downloads</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Quality Options</h3>
-                    <p>Choose from 144p to 4K resolution</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Secure & Private</h3>
-                    <p>No tracking, no data collection, no registration</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💯</div>
-                    <h3>100% Free</h3>
-                    <p>No hidden costs or premium subscriptions</p>
-                </div>
-            </div>
         </section>
 
-        <!-- How to Use Section -->
-        <section id="how-to" class="how-to">
-            <h2>How to Use</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Copy Video URL</h3>
-                    <p>Go to the video platform and copy the video link from your browser</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Paste & Get Info</h3>
-                    <p>Paste the URL in the input field above and click "Get Video Info"</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Select Format & Quality</h3>
-                    <p>Choose your preferred format (MP4/WEBM/MP3) and quality</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Download</h3>
-                    <p>Click the download button and save your video!</p>
-                </div>
-            </div>
+        <!-- How it works: a real sequence -->
+        <section id="how-to" class="vd-section">
+            <h2 class="wb-h2 vd-section-title">How it works</h2>
+            <ol class="vd-steps">
+                <li><strong>Copy the link</strong> from the address bar or the share menu of the video.</li>
+                <li><strong>Paste it above</strong> and press Find video.</li>
+                <li><strong>Choose a format</strong>: MP4 or WebM for video, MP3 for just the sound, and a quality from 144p to 4K.</li>
+                <li><strong>Press Download</strong> and the file goes to your downloads folder.</li>
+            </ol>
         </section>
 
-        <!-- Supported Platforms -->
-        <section id="supported" class="supported-platforms">
-            <h2>Supported Platforms</h2>
-            <div class="platforms-grid">
-                <div class="platform">
-                    <div class="platform-icon" style="background: #FF0000;">▶</div>
-                    <span>YouTube</span>
-                </div>
-                <div class="platform">
-                    <div class="platform-icon" style="background: #000000;">♪</div>
-                    <span>TikTok</span>
-                </div>
-                <div class="platform">
-                    <div class="platform-icon"
-                        style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
-                        📷</div>
-                    <span>Instagram</span>
-                </div>
-                <div class="platform">
-                    <div class="platform-icon" style="background: #1877F2;">f</div>
-                    <span>Facebook</span>
-                </div>
-                <div class="platform">
-                    <div class="platform-icon" style="background: #1DA1F2;">🐦</div>
-                    <span>Twitter</span>
-                </div>
-                <div class="platform">
-                    <div class="platform-icon" style="background: #00ADEF;">▷</div>
-                    <span>Vimeo</span>
-                </div>
+        <section id="supported" class="vd-section">
+            <h2 class="wb-h2 vd-section-title">Sites it works with</h2>
+            <div class="wb-row">
+                <span class="wb-chip">YouTube</span>
+                <span class="wb-chip">TikTok</span>
+                <span class="wb-chip">Instagram</span>
+                <span class="wb-chip">Facebook</span>
+                <span class="wb-chip">X (Twitter)</span>
+                <span class="wb-chip">Vimeo</span>
             </div>
-            <p class="note">Note: All platforms are fully supported with high-speed processing!</p>
+            <p class="wb-note vd-disclaimer">For personal use. Respect copyright and each site's terms of service.</p>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Video Downloader. All rights reserved.</p>
-            <p>Programmer: Bela Abukhadija (<a href="mailto:belalabukhadija97@gmail.com"
-                    style="color: var(--primary-color); text-decoration: none;">belalabukhadija97@gmail.com</a>)</p>
-            <p>For more free tools, visit my website <a href="https://belal.work" target="_blank"
-                    style="color: var(--primary-color); text-decoration: none;">belal.work</a>.</p>
-            <p class="disclaimer">This tool is for personal use only. Please respect copyright laws and terms of service
-                of the platforms.</p>
-        </div>
+    <footer class="wb-foot">
+        <span>Made by <a href="mailto:belalabukhadija97@gmail.com">Belal Abukhadija</a></span>
+        <span>More free tools at <a href="https://belal.work" target="_blank" rel="noopener noreferrer">belal.work</a></span>
     </footer>
 
     <script src="script.js"></script>
